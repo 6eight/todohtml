@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>To-Do List</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    h1 {
+        text-align: center;
+    }
+    #todoList {
+        max-width: 400px;
+        margin: 20px auto;
+        padding: 0 20px;
+    }
+    #todoList ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    #todoList ul li {
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+    }
+    #todoList ul li input[type="checkbox"] {
+        margin-right: 10px;
+    }
+    #addTask {
+        margin-top: 20px;
+        display: flex;
+    }
+    #addTask input[type="text"] {
+        flex: 1;
+        padding: 8px;
+    }
+    #addTask button {
+        padding: 8px 20px;
+        background-color: #007bff;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+    }
+    #addTask button:hover {
+        background-color: #0056b3;
+    }
+</style>
+</head>
+<body>
+
+<h1>To-Do List</h1>
+
+<div id="todoList">
+    <ul id="tasks">
+        <!-- Existing tasks will be added here -->
+    </ul>
+    <div id="addTask">
+        <input type="text" id="taskInput" placeholder="Enter a new task">
+        <button onclick="addTask()">Add Task</button>
+    </div>
+</div>
+
+<script>
+function addTask() {
+    var taskInput = document.getElementById("taskInput");
+    var taskText = taskInput.value.trim();
+
+    if (taskText !== "") {
+        var taskList = document.getElementById("tasks");
+        var newTask = document.createElement("li");
+        newTask.innerHTML = `
+            <input type="checkbox">
+            <span>${taskText}</span>
+            <button onclick="removeTask(this)">Remove</button>
+        `;
+        taskList.appendChild(newTask);
+        taskInput.value = "";
+    } else {
+        alert("Please enter a task!");
+    }
+}
+
+function removeTask(taskElement) {
+    var listItem = taskElement.parentElement;
+    listItem.remove();
+}
+</script>
+
+</body>
+</html>
